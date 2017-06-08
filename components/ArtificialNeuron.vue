@@ -47,7 +47,7 @@ export default {
 .neuron {
   display: flex;
   flex-direction: column;
-  margin: 0 0 16px 16px;
+  margin: 0 5px 15px 5px;
 }
 
 .value-display {
