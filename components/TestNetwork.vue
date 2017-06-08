@@ -36,25 +36,29 @@ export default {
     return {
       layers: 3,
       neuronsPerLayer: 3,
-      // network: createNetwork(2, 2, 2, 2),
-      inputs: [0, 1, 0],
-      desiredOutputs: [0.75, 0.1, 0.3],
+      network: [],
+      inputs: [1, 2, 3],
+      desiredOutputs: [1, 1, 1],
       momentum: 0.2
     }
   },
   computed: {
-    hiddenLayers () { return new Array(this.layers - 1).fill(this.neuronsPerLayer) },
-    network () { return createNetwork(...[3, ...this.hiddenLayers, 3]) }
+    hiddenLayers () { return new Array(this.layers - 1).fill(this.neuronsPerLayer) }
   },
   methods: {
     propagate () { propagate(this.inputs, this.network) },
-    backPropagate () { backPropagate([0.75, 0.1], this.network, this.momentum) },
+    backPropagate () { backPropagate(this.desiredOutputs, this.network, this.momentum) },
     train () {
       for (let i = 0; i < 1000; i++) {
         this.propagate()
         this.backPropagate()
       }
-    }
+    },
+    buildNetwork () { this.network = createNetwork(...[3, ...this.hiddenLayers, 3]) }
+  },
+  watch: {
+    layers: { handler () { this.buildNetwork() }, immediate: true },
+    neuronsPerLayer: { handler () { this.buildNetwork() }, immediate: true }
   },
   components: {
     InputValue,
