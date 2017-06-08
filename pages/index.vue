@@ -1,5 +1,9 @@
 <template>
   <section class="container">
+    <i class="fa fa-github fa-2x"></i>
+    <a href="https://github.com/senritsu/artificial-neural-network">
+      senritsu/artificial-neural-network
+    </a>
     <h1 class="title">
       Artificial Neural Network experiments
     </h1>
